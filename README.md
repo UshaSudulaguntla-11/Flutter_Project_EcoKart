@@ -126,5 +126,5 @@ This project is set up for automatic deployments on Render using the following b
 
 
 <div align="center">
-  <i>Built with ❤️ using Flutter & Dart.</i>
+  <i>Built using Flutter & Dart.</i>
 </div>
