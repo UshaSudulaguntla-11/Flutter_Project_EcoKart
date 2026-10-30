@@ -1,64 +1,130 @@
-# EcoKart – Eco-Friendly Marketplace (Flutter)
+<div align="center">
 
-A shopping app with 100 plastic-free, eco-friendly products that supports
-**UN SDG 12: Responsible Consumption and Production**.
+# 🛒 EcoKart
+### *A Modern, High-Performance Flutter Web Marketplace*
 
-## Features
-- Sign up / sign in with email and password (saved on the device, passwords hashed)
-- 100 products in 7 categories, each with a 5-picture gallery and full details
-- Search by item name, filter by rating and price, sort, category pages
-- Pages: All Products, Deals of the Day, Bestsellers, New Arrivals
-- Wishlist and cart with free-delivery progress (free above Rs 499, else Rs 40)
-- Checkout form: name, mobile, email, address, city, state, pincode (validated)
-- One order per product, with order history, status timeline and full details
-- SDG 12 page with estimated plastic and CO2 saved from your orders
-- Orders, addresses and accounts are saved on the device
+[![Flutter](https://img.shields.io/badge/Flutter-Cross--Platform-02569B?style=for-the-badge&logo=flutter&logoColor=white)](https://flutter.dev)
+[![Hosted on Render](https://img.shields.io/badge/Hosted%20on-Render-46E3B7?style=for-the-badge&logo=render&logoColor=black)](https://render.com)
+[![Unsplash API](https://img.shields.io/badge/Powered%20by-Unsplash%20API-000000?style=for-the-badge&logo=unsplash&logoColor=white)](https://unsplash.com)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
 
-## Tech
-Flutter, Provider (state management), shared_preferences, crypto, http, google_fonts.
+*EcoKart is a modern, responsive e-commerce application built using Flutter. It delivers dynamic product discovery, seamless imagery via the Unsplash API, and secure build-time secret management.*
 
-## Run it
-1. Create a Flutter project and copy these files in:
-   ```
-   flutter create ecokart
-   ```
-   Copy `lib/main.dart`, `pubspec.yaml` and the whole `assets/` folder over the
-   ones in the new project. Delete the default `test/widget_test.dart`.
-2. Install and run:
-   ```
-   flutter clean
-   flutter pub get
-   flutter run
-   ```
-3. Android release builds need this line in
-   `android/app/src/main/AndroidManifest.xml` (above `<application>`):
-   ```xml
-   <uses-permission android:name="android.permission.INTERNET"/>
-   ```
+</div>
 
-## Real product photos from Unsplash (optional)
-1. Create a free app at https://unsplash.com/developers and copy the **Access Key**.
-2. Open `lib/secrets.dart` and paste it between the quotes:
-   ```dart
-   const String kUnsplashAccessKey = 'YOUR_ACCESS_KEY';
-   ```
-3. Add this line to `.gitignore` so the key is never uploaded to GitHub:
-   ```
-   lib/secrets.dart
-   ```
-   (`lib/secrets.example.dart` is the empty template that stays on GitHub.)
-   Never use the Secret Key in the app.
-4. The app searches Unsplash for each product, saves the result on the device,
-   and shows "Photo by NAME on Unsplash". Free keys allow about 50 searches an
-   hour. Without a key the bundled pictures in `assets/products/` are used.
+---
 
-To use your own photos, put files named like `p1_1.jpg` (product 1, picture 1)
-in `assets/products/`.
+## 🚀 Features
 
-## Project structure
+### 🛒 1. Dynamic Marketplace & Catalog
+* **Responsive Layout:** Optimized for seamless desktop, mobile (Android/iOS), and web viewports.
+* **Product Discovery:** Category-based filtering and instant search capabilities.
+* **Real-time Product Imagery:** Fetches high-resolution imagery directly via the **Unsplash REST API**.
+
+### 🔒 2. Secure Secret Management
+* **Zero Credential Leaks:** Implements `String.fromEnvironment` to pull API keys during build compilation.
+* **CI/CD Integration:** Uses `--dart-define` inside Render's build pipeline to inject secrets safely without exposing them in public repositories.
+
+### 🛍️ 3. Interactive Shopping Cart
+* Real-time item additions and quantity updates.
+* Instant subtotal calculations with responsive drawer components.
+* Persistent local state management.
+
+### ☁️ 4. Continuous Deployment
+* Pre-configured pipeline for continuous deployment on **Render**.
+* Automated Flutter Web compilation into static production release artifacts (`build/web`).
+
+---
+
+## 🛠️ Tech Stack
+
+| Component | Technology |
+| :--- | :--- |
+| **Framework** | [Flutter](https://flutter.dev) |
+| **Language** | [Dart](https://dart.dev) |
+| **API Integration** | Unsplash REST API |
+| **Hosting Platform** | Render Static Site |
+
+---
+
+## 📁 Project Structure
+
+```text
+Flutter_Project_EcoKart/
+│
+├── android/                 # Android native project configurations
+├── ios/                     # iOS native project configurations
+├── lib/                     # Main Dart codebase (UI, Services, Models)
+├── web/                     # Web entry points, index.html & icons
+├── .metadata                # Flutter project tracking metadata
+├── analysis_options.yaml    # Linter & static code analysis rules
+├── pubspec.yaml             # Flutter dependencies & asset configurations
+└── README.md                # Project documentation
 ```
-lib/main.dart        all app code (models, providers, screens)
-lib/secrets.dart     your private Unsplash key (ignored by git)
-assets/products/     500 bundled product pictures (p1_1.jpg ... p100_5.jpg)
-pubspec.yaml         packages and assets
+
+---
+
+## ⚙️ How to Run Locally
+
+### 1. Clone the Repository
+```bash
+git clone https://github.com/UshaSudulaguntla-11/Flutter_Project_EcoKart.git
+cd Flutter_Project_EcoKart
 ```
+
+### 2. Install Dependencies
+```bash
+flutter pub get
+```
+
+### 3. Run Application Locally
+Provide your Unsplash API key using the `--dart-define` flag:
+
+**For Web:**
+```bash
+flutter run -d chrome --dart-define=UNSPLASH_ACCESS_KEY=your_actual_access_key
+```
+
+**For Mobile (Android/iOS):**
+```bash
+flutter run --dart-define=UNSPLASH_ACCESS_KEY=your_actual_access_key
+```
+
+*(Note: If no key is provided, the app safely falls back to local placeholder assets).*
+
+---
+
+## ☁️ Render Deployment Configuration
+
+This project is set up for automatic deployments on Render using the following build settings:
+
+* **Environment:** `Static Site`
+* **Build Command:** 
+  ```bash
+  git clone --depth 1 -b stable https://github.com/flutter/flutter.git && flutter/bin/flutter config --enable-web && flutter/bin/flutter build web --release --dart-define=UNSPLASH_ACCESS_KEY=$UNSPLASH_ACCESS_KEY
+  ```
+* **Publish Directory:** `build/web`
+* **Environment Variable:** `UNSPLASH_ACCESS_KEY` = `your_unsplash_access_key`
+
+---
+
+## 🎯 Key Learnings & Architecture
+
+* **Secure Build-Time Configuration:** Managing environment variables across CI/CD environments and Flutter web.
+* **Cross-Platform Responsive Design:** Creating fluid UIs with Flutter layouts for Web, Android, and iOS.
+* **REST API Integration:** Asynchronous HTTP fetching and dynamic image rendering.
+
+---
+
+## 👩‍💻 Author
+
+**Usha Sudulaguntla**
+* GitHub: [@UshaSudulaguntla-11](https://github.com/UshaSudulaguntla-11)
+
+---
+
+
+
+<div align="center">
+  <i>Built with ❤️ using Flutter & Dart.</i>
+</div>
