@@ -108,6 +108,15 @@ This project is set up for automatic deployments on Render using the following b
 
 ---
 
+
+## 🌐 Live Demo
+
+Experience the live application deployed on Render:
+👉 **[https://flutter-project-ecokart.onrender.com](https://flutter-ecokart-x1ds.onrender.com/)**
+
+
+---
+
 ## 🎯 Key Learnings & Architecture
 
 * **Secure Build-Time Configuration:** Managing environment variables across CI/CD environments and Flutter web.
