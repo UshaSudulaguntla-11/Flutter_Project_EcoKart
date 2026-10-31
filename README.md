@@ -16,7 +16,7 @@ The project supports **UN Sustainable Development Goal 12: Responsible Consumpti
 
 ## 🌐 Live Demo
 
-👉 **https://flutter-project-ecokart.onrender.com**
+👉 **https://flutter-ecokart-x1ds.onrender.com/**
 
 > The site runs on Render's free plan, so the first visit after a quiet period can take a little while to load.
 
